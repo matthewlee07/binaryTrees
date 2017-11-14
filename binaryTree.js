@@ -110,12 +110,18 @@ class BinarySearchTree {
         return this.left._findMin();
     }
 
-    findHeight(node) {
-        if(!node) return 0;
-        let leftHeight = findHeight(node.left);
-        let rightHeight = findHeight(node.right);
-        if(leftHeight>= rightHeight) return leftHeight;
-        return rightHeight;
+    findHeight(node, depth=0) {
+        //basecase:
+        //if !node return depth
+        if (!node) return depth;
+        //recursive:
+        //get max depth of left
+        let leftHeight = this.findHeight(node.left, depth + 1);
+        //get max depth of right
+        let rightHeight = this.findHeight(node.right, depth + 1);
+        //return greatest max depth
+        if (leftHeight >= rightHeight) return leftHeight;
+        else return rightHeight
     }
 }
 
@@ -123,16 +129,13 @@ const playBinarySearchTree = new BinarySearchTree;
 
 playBinarySearchTree.insert(6, "F");
 // console.log(playBinarySearchTree);
-
 playBinarySearchTree.insert(1, "A");
 // console.log(playBinarySearchTree);
 playBinarySearchTree.insert(17, "Q");
 playBinarySearchTree.insert(7, "G");
 // console.log(playBinarySearchTree);
-
 playBinarySearchTree.insert(26, "Z");
 // console.log(playBinarySearchTree);
-
 playBinarySearchTree.insert(2, "B");
 // console.log(playBinarySearchTree);
 playBinarySearchTree.insert(21, "U");
@@ -140,10 +143,6 @@ playBinarySearchTree.insert(22, "V");
 playBinarySearchTree.insert(23, "W");
 playBinarySearchTree.insert(24, "X");
 
-// playBinarySearchTree.remove(26);
-// playBinarySearchTree.remove(6);
-// playBinarySearchTree.remove(7);
+playBinarySearchTree.remove(23);
 
-playBinarySearchTree.findHeight();
-
-console.log(playBinarySearchTree.findHeight());
+console.log(playBinarySearchTree.findHeight(playBinarySearchTree));
