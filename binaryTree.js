@@ -110,7 +110,7 @@ class BinarySearchTree {
         return this.left._findMin();
     }
 
-    findHeight(node, depth=0) {
+    findHeight(node, depth = 0) {
         //basecase:
         //if !node return depth
         if (!node) return depth;
@@ -123,26 +123,37 @@ class BinarySearchTree {
         if (leftHeight >= rightHeight) return leftHeight;
         else return rightHeight
     }
+
 }
 
 const playBinarySearchTree = new BinarySearchTree;
 
-playBinarySearchTree.insert(6, "F");
-// console.log(playBinarySearchTree);
-playBinarySearchTree.insert(1, "A");
-// console.log(playBinarySearchTree);
-playBinarySearchTree.insert(17, "Q");
-playBinarySearchTree.insert(7, "G");
-// console.log(playBinarySearchTree);
-playBinarySearchTree.insert(26, "Z");
-// console.log(playBinarySearchTree);
-playBinarySearchTree.insert(2, "B");
-// console.log(playBinarySearchTree);
-playBinarySearchTree.insert(21, "U");
-playBinarySearchTree.insert(22, "V");
-playBinarySearchTree.insert(23, "W");
-playBinarySearchTree.insert(24, "X");
+function isBinarySearchTree(node) {
+    //basecase: if !node return 
+    console.log(node);
+    if (!(node.left && node.right)) return true;
+    //recursive: 
+    if (node.left.key > node.key) {
+        return false
+    }
+    if (node.right.key < node.key) {
+        return false
+    }
 
-playBinarySearchTree.remove(23);
+    isBinarySearchTree(node.left);
+    // isBinarySearchTree(node.right);
+}
+playBinarySearchTree.insert(5, "F");
+playBinarySearchTree.insert(4, "A");
+playBinarySearchTree.insert(6, "Q");
+// playBinarySearchTree.insert(7, "G");
+// playBinarySearchTree.insert(26, "Z");
+// playBinarySearchTree.insert(2, "B");
+// playBinarySearchTree.insert(21, "U");
+// playBinarySearchTree.insert(22, "V");
+// playBinarySearchTree.insert(23, "W");
+// playBinarySearchTree.insert(24, "X");
 
-console.log(playBinarySearchTree.findHeight(playBinarySearchTree));
+// playBinarySearchTree.remove(23);
+
+isBinarySearchTree(playBinarySearchTree);
